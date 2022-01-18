@@ -18,6 +18,7 @@ var basicConfig = generator.Config{
 	DefaultPackageName: "github.com/example/test",
 	DefaultOutputName:  "-",
 	ResolveExtensions:  []string{".json", ".yaml"},
+	YAMLExtensions:     []string{".yaml", ".yml"},
 	Warner: func(message string) {
 		log.Printf("[from warner] %s", message)
 	},
@@ -83,6 +84,11 @@ func TestYamlMultilineDescriptions(t *testing.T) {
 	cfg := basicConfig
 	cfg.YAMLExtensions = []string{"yaml"}
 	testExampleFile(t, cfg, "./data/yaml/yamlMultilineDescriptions.yaml")
+}
+
+func TestYamlStructNameFromFile(t *testing.T) {
+	cfg := basicConfig
+	testExampleFile(t, cfg, "./data/yaml/yamlStructNameFromFile.yaml")
 }
 
 func testExamples(t *testing.T, cfg generator.Config, dataDir string) {
