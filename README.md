@@ -1,3 +1,6 @@
+> This is a fork of [atombender/go-jsonschema](https://github.com/atombender/go-jsonschema), which does not seem to be maintained anymore.
+> Identity Squad is using the tool to generate code for Kafka event bodies.
+
 **go-jsonschema is a tool to generate Go data types from [JSON Schema](http://json-schema.org/) definitions.**
 
 This tool generates Go data types and structs that corresponds to definitions in the schema, along with unmarshaling code that validates the input JSON according to the schema's validation rules.
