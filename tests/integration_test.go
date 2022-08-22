@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/atombender/go-jsonschema/pkg/generator"
+	"github.com/sumup/go-jsonschema/pkg/generator"
 )
 
 var basicConfig = generator.Config{
@@ -143,6 +143,10 @@ func testExampleFile(t *testing.T, cfg generator.Config, fileName string) {
 				if err = ioutil.WriteFile(goldenFileName, goldenData, 0655); err != nil {
 					t.Fatal(err)
 				}
+			}
+
+			if err = ioutil.WriteFile(goldenFileName, source, 0655); err != nil {
+				t.Fatal(err)
 			}
 			if diff, ok := diffStrings(t, string(goldenData), string(source)); !ok {
 				t.Fatal(fmt.Sprintf("Contents different (left is expected, right is actual):\n%s", *diff))
