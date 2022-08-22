@@ -58,9 +58,25 @@ var rootCmd = &cobra.Command{
 			DefaultOutputName:  defaultOutput,
 			DefaultPackageName: defaultPackage,
 			SchemaMappings:     []generator.SchemaMapping{},
-			ResolveExtensions:  resolveExtensions,
 			YAMLExtensions:     yamlExtensions,
 		}
+
+		for _, yamlExt := range yamlExtensions {
+			extPresent := false
+			for _, resExt := range resolveExtensions {
+				if resExt == yamlExt {
+					extPresent = true
+					break
+				}
+			}
+
+			if !extPresent {
+				resolveExtensions = append(resolveExtensions, yamlExt)
+			}
+		}
+
+		cfg.ResolveExtensions = resolveExtensions
+
 		for _, id := range allKeys(schemaPackageMap, schemaOutputMap, schemaRootTypeMap) {
 			mapping := generator.SchemaMapping{SchemaID: id}
 			if s, ok := schemaPackageMap[id]; ok {
